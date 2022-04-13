@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import NoteContext from "./noteContext";
 
 function NoteState(props) {
-  const host = "http://localhost:5000";
+  const host = "http://localhost:5000"
   const notesInitial = [
     
   ];
@@ -30,28 +30,15 @@ const json=await response.json();
     //TODO:API Call
     const response = await fetch(`${host}/api/notes/addnote`, {
       method: "POST",    
-      headers: {
-		  'Access-Control-Allow-Origin': 'http://localhost:3000',
-			'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
-		'Access-Control-Allow-Headers': 'Authorization, Content-Type',
+      headers: {		  
         "Content-Type": "application/json",
         "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjIzZGE0ZDA1MDcwNTQ3Mjk5OWQyMDQ2In0sImlhdCI6MTY0OTQ4NTY2M30.t84cy_-b80GKBRHt6oi4McQ981Yms0lTqxuQ0I4-N_Y",
       },
       body: JSON.stringify(title,description,tag),
     });
-    const json=await response.json();
-    console.log(json);
+    const note=await response.json();
+    console.log(note);
 
-    console.log("adding a new note");
-    const note = {
-      _id: "61322f19553781a8ca8d0e09",
-      user: "6131dc5e3e4037cd4734a066",
-      title: title,
-      description: description,
-      tag: tag,
-      date: "2021-09-03T14:20:09.668Z",
-      __v: 0,
-    };
     setNotes(notes.concat(note));
   };
 

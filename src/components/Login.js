@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 //import {useHistory} from 'react-router-dom'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 
-function Login() {
+function Login(props) {
 //let history=useHistory();
-const navigate = useNavigate()
+let navigate = useNavigate();
     const [credential, setCredential] = useState({email:"",password:""});
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -24,11 +24,13 @@ const navigate = useNavigate()
             //save the auth-token and redirect
             localStorage.setItem('token',json.authtoken);
            // history.push("/");
-           navigate('/');
-
+           props.showAlert("Login successfully","success");
+           //console.log(navigate);
+           navigate("/");
+        
         }else
         {
-            alert("Invalid credentials")
+            props.showAlert("Invalid Details","danger");
         }
     }
 
@@ -36,7 +38,8 @@ const navigate = useNavigate()
         setCredential({...credential,[e.target.name]:e.target.value})
         }
     return (
-        <div>
+        <div className="mt-3">
+            <h2>Login to continue to iNotebook</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
